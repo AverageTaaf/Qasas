@@ -76,7 +76,8 @@ function HomeContent() {
       result = result.filter(p => 
         p.name_en.toLowerCase().includes(s) || 
         p.name_ar.includes(s) || 
-        p.name_transliteration.toLowerCase().includes(s)
+        p.name_transliteration.toLowerCase().includes(s) ||
+        (p.search_tags && p.search_tags.some((tag: string) => tag.toLowerCase().includes(s)))
       );
     }
 
