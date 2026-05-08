@@ -1,3 +1,4 @@
+// Trigger redeploy: 2026-05-08
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
