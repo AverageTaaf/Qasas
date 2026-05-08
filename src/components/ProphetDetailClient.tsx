@@ -108,11 +108,13 @@ export default function ProphetDetailClient({
               <BookOpen size={20} />
               From the Holy Quran
             </h3>
-            {prophet.quran_verses.map((verse: { text_en: string; surah: string; verse_start: number; verse_end: number }, vIdx: number) => (
+            {prophet.quran_verses.map((verse: { text_en: string; text_ar?: string; surah: string; verse_start: number; verse_end: number }, vIdx: number) => (
               <div key={vIdx} className="mb-6 last:mb-0">
-                <p className="font-arabic text-2xl leading-loose text-right text-heading mb-4" dir="rtl">
-                  {/* Since arabic text is not provided in data for verses, omitting it or using a placeholder if available */}
-                </p>
+                {verse.text_ar && (
+                  <p className="font-arabic text-2xl leading-loose text-right text-heading mb-4" dir="rtl">
+                    {verse.text_ar}
+                  </p>
+                )}
                 <p className="text-lg italic text-foreground/80 border-l-4 border-brand-gold pl-4">
                   &quot;{verse.text_en}&quot;
                 </p>

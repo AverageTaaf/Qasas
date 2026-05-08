@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { Search, ChevronRight } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import prophetsData from "@/data/prophets.json";
 
 const QURAN_QUOTES = [
@@ -33,14 +34,24 @@ const QURAN_QUOTES = [
   }
 ];
 
-export default function HomeClient() {
-  const [search, setSearch] = useState("");
+function HomeContent() {
+  const searchParams = useSearchParams();
+  const [search, setSearch] = useState(() => searchParams.get("search") || "");
   const [filter, setFilter] = useState("Chronological Order");
   const [quote, setQuote] = useState(QURAN_QUOTES[0]);
 
+  // Sync search state if URL changes externally
+  const urlQuery = searchParams.get("search") || "";
+  const [prevUrlQuery, setPrevUrlQuery] = useState(urlQuery);
+  if (urlQuery !== prevUrlQuery) {
+    setPrevUrlQuery(urlQuery);
+    setSearch(urlQuery);
+  }
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setQuote(QURAN_QUOTES[Math.floor(Math.random() * QURAN_QUOTES.length)]);
+    // Set a random quote only on mount to avoid hydration mismatch
+    const randomQuote = QURAN_QUOTES[Math.floor(Math.random() * QURAN_QUOTES.length)];
+    setTimeout(() => setQuote(randomQuote), 0);
   }, []);
   
   const filters = [
@@ -193,5 +204,13 @@ export default function HomeClient() {
         )}
       </section>
     </div>
+  );
+}
+
+export default function HomeClient() {
+  return (
+    <Suspense fallback={<div className="text-center py-20">Loading stories...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

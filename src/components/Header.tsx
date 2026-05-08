@@ -7,13 +7,13 @@ import { useState, useEffect } from "react";
 export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const isDark = document.documentElement.classList.contains("dark") || window.matchMedia("(prefers-color-scheme: dark)").matches;
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setDarkMode(isDark);
-      if (isDark) document.documentElement.classList.add("dark");
+      setTimeout(() => {
+        setDarkMode(isDark);
+        if (isDark) document.documentElement.classList.add("dark");
+      }, 0);
     }
   }, []);
 

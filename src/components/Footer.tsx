@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 export default function Footer() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
+    setTimeout(() => setMounted(true), 0);
   }, []);
   return (
     <footer className="w-full bg-card border-t border-border mt-auto">

@@ -122,7 +122,11 @@ body {
 }
 
 /* Stagger delays */
+.delay-0 {
+  animation-delay: 0ms;
+}
 .delay-100 {
+
   animation-delay: 100ms;
 }
 .delay-200 {

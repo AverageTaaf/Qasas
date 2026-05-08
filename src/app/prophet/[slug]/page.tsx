@@ -21,8 +21,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `Prophet ${prophet.name_en} (PBUH) | Qasas`,
     description: `${prophet.name_en}: ${prophet.one_line_glimpse} Learn about the life and miracles of Prophet ${prophet.name_en} from the Holy Quran.`,
+    alternates: {
+      canonical: `/prophet/${prophet.slug}`,
+    },
   };
 }
+
+
 
 export default async function ProphetPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -37,10 +42,40 @@ export default async function ProphetPage({ params }: { params: Promise<{ slug: 
   const nextProphet = prophetIndex < prophetsData.length - 1 ? prophetsData[prophetIndex + 1] : null;
 
   return (
-    <ProphetDetailClient 
-      prophet={prophet} 
-      prevProphet={prevProphet} 
-      nextProphet={nextProphet} 
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": `Story of Prophet ${prophet.name_en} (PBUH)`,
+            "description": prophet.summary,
+            "author": {
+              "@type": "Organization",
+              "name": "Qasas"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Qasas",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://qasas-prophetic.vercel.app/logo.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://qasas-prophetic.vercel.app/prophet/${prophet.slug}`
+            }
+          })
+        }}
+      />
+      <ProphetDetailClient 
+        prophet={prophet} 
+        prevProphet={prevProphet} 
+        nextProphet={nextProphet} 
+      />
+    </>
   );
 }
+
