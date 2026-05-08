@@ -54,6 +54,11 @@ export default function ProphetDetailClient({
         <div className="flex flex-col items-center justify-center gap-2">
           <span className="font-arabic text-4xl md:text-5xl text-foreground/90">{prophet.name_ar}</span>
           <span className="text-lg text-foreground/60">({prophet.name_transliteration})</span>
+          {prophet.search_tags && prophet.search_tags.length > 0 && (
+            <p className="text-sm text-foreground/50 mt-1 italic">
+              Also known as: {prophet.search_tags.join(", ")}
+            </p>
+          )}
           <span className="text-sm font-medium text-brand-gold bg-brand-gold/10 px-4 py-1 rounded-full mt-2">
             Peace be upon him
           </span>
