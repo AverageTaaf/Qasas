@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Removed output: "export" for better Vercel optimization
+  // Vercel will still serve static pages but with better edge routing
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
