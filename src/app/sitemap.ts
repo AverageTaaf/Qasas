@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next'
 import prophetsData from '@/data/prophets.json'
 
+export const dynamic = 'force-static'
+
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://qasas-prophetic.vercel.app'
 
