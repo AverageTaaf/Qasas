@@ -1,4 +1,4 @@
-// Trigger redeploy for Vercel fix: 2026-05-08_02
+// Trigger redeploy for Vercel fix: 2026-05-09_02
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
