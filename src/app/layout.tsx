@@ -3,6 +3,7 @@ import { Inter, Playfair_Display, Noto_Naskh_Arabic } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SplashScreen from "@/components/SplashScreen";
 import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -82,8 +83,22 @@ export default function RootLayout({
             })
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col font-sans islamic-pattern bg-repeat">
+        <SplashScreen />
         <Header />
         <main className="flex-grow w-full max-w-[1200px] mx-auto px-4 md:px-6 py-8">
           {children}

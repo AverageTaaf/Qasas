@@ -9,10 +9,20 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const isDark = document.documentElement.classList.contains("dark") || window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const storedTheme = localStorage.getItem("theme");
+      let isDark;
+      if (storedTheme) {
+        isDark = storedTheme === "dark";
+      } else {
+        isDark = document.documentElement.classList.contains("dark") || window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
       setTimeout(() => {
         setDarkMode(isDark);
-        if (isDark) document.documentElement.classList.add("dark");
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
       }, 0);
     }
   }, []);
@@ -22,8 +32,10 @@ export default function Header() {
     setDarkMode(newDarkMode);
     if (newDarkMode) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   };
 

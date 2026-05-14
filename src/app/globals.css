@@ -141,3 +141,23 @@ body {
 .delay-500 {
   animation-delay: 500ms;
 }
+
+@keyframes progress {
+  0% { transform: scaleX(0); transform-origin: left; opacity: 0.8; }
+  49% { transform: scaleX(1); transform-origin: left; opacity: 1; }
+  51% { transform: scaleX(1); transform-origin: right; opacity: 1; }
+  100% { transform: scaleX(0); transform-origin: right; opacity: 0.8; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+.animate-progress {
+  animation: progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.5s ease-out forwards;
+}
