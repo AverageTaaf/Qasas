@@ -13,10 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/references',
     '/contact',
+    '/sitemap',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'daily' as const,
     priority: route === '' ? 1 : 0.8,
   }))
 
@@ -24,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const prophetRoutes = prophetsData.map((prophet) => ({
     url: `${baseUrl}/prophet/${prophet.slug}`,
     lastModified: new Date().toISOString().split('T')[0],
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'daily' as const,
     priority: 0.7,
   }))
 

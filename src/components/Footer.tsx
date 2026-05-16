@@ -30,6 +30,7 @@ export default function Footer() {
           <Link href="/about" className="text-sm hover:text-brand-accent transition-colors">About</Link>
           <Link href="/references" className="text-sm hover:text-brand-accent transition-colors">References</Link>
           <Link href="/contact" className="text-sm hover:text-brand-accent transition-colors">Contact</Link>
+          <Link href="/sitemap" className="text-sm hover:text-brand-accent transition-colors font-medium text-brand-accent/80">HTML Sitemap</Link>
         </div>
       </div>
       
